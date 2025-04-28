@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -o main .
+RUN go build -o horcrux .
 
 # Start a new stage from scratch
 FROM alpine:latest  
@@ -22,7 +22,7 @@ FROM alpine:latest
 WORKDIR /root/
 
 # Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/main .
+COPY --from=builder /app/horcrux /bin/horcrux
 
 # Command to run the executable
-CMD ["./main"]
+CMD ["/bin/horcrux"]
